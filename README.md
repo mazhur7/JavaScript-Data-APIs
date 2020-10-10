@@ -22,3 +22,5 @@ Objectives
 See loading data from local image / JSON / CSV
 "render" data with native JS DOM manipulation
 Discover missing pieces: no persistence, API keys not hidden
+
+used by git VSC
