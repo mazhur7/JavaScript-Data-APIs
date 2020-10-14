@@ -1,0 +1,34 @@
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Navigator -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <title> Data/APIs : data example objects </title>
+</head>
+
+<body>
+    <h1>Data App: Geolocation</h1>
+    <h4>Fetch JSON from API and map lat lon </h4>
+    <div>
+        <h2><a href="index.html">Home</a> |<a href="temperaturdata.html">CSV data fetch </a> || <a href="test.html">Json data fetch </a> </h2>
+    </div>
+
+
+    <script>
+        const url_api = 'https://api.wheretheiss.at/v1/satellites/25544';
+        async function getUrlAPI() {
+            const response = await fetch(url_api);
+            const data = await response.json();
+            console.log(data);
+            console.log('connected')
+        }
+    </script>
+
+
+</body>
+
+</html>

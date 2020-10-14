@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title> Data/APIs : data example objects </title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+    <!-- chart.js loading for data visualisation -->
+</head>
+
+<body>
+    <h1>Data App: image and text objects </h1>
+    <div>
+        <h2><a href="index.html">Home</a> |<a href="temperaturdata.html">*.CSV data fetch </a> || <a href="test.html">Json data fetch </a> </h2>
+    </div>
+
+    <img src="" id="bigdata" width="1000" />
+    <h3> <a href="csv_example_multiple.html">chart with multiple lines</a></h3>
+    <canvas id="chart" width="400" height="200"></canvas>
+
+    <table id="table">
+        <td> </td>
+    </table>
+
+    <script>
+        /////////////////fetch image file///////////////////////////
+        catchBigdata()
+            .then(resp => {
+                console.log('Yu-huu!!!')
+            })
+            .catch(error => {
+                console.log('Error!')
+                console.error(error);
+            });
+
+        async function catchBigdata() {
+            const res = await fetch('/fetch_data/Big-Data-blog1.jpg');
+            const blob = await res.blob();
+            document.getElementById('bigdata').src = URL.createObjectURL(blob);
+        }
+        //////////////////chart ////////////////////
+
+        ChartIt();
+        async function ChartIt() {
+            const data = await getData();
+            const ctx = document.getElementById('chart').getContext('2d');
+
+            const myChart = new Chart(ctx, {
+                type: 'line',
+
+                data: {
+                    labels: data.years,
+                    datasets: [{
+                        label: 'Global Average Temperature in C*',
+                        data: data.temps,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+
+            });
+        }
+
+        ////////////////////table /////////////////////
+
+        GetTable();
+        async function GetTable() {
+            const data = await getData().then(table => {
+                    document.getElementById('table').innerJson = table;
+                    console.log(table);
+                })
+                .catch(error => {
+                    console.log('Error!');
+                });
+        }
+
+
+
+
+        /////////////////fetch data from csv file///////////////////////////
+
+
+        async function getData() {
+
+            const response = await fetch('/fetch_data/ZonAnn.Ts+dSST.csv');
+            const years = []; //local variable for X labels 
+            const temps = []; //global variable for Y 
+            const data = await response.text();
+            //console.log(data);  //checking array
+
+            const table = data.split('\n').slice(1); //  .split split of the rows; .slice delete the title(first) row 
+            table.forEach(row => {
+                const column = row.split(',');
+                years.push(column[0]); //split data by the column - year
+                temps.push(parseFloat(column[1]) + 14);
+                console.log();
+            });
+            return {
+                years,
+                temps
+            };
+        }
+    </script>
+
+</body>
+
+</html>

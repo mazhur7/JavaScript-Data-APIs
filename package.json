@@ -1,0 +1,27 @@
+{
+  "name": "javascript-data-apis",
+  "version": "1.0.0",
+  "description": "this is the data selfie app by Marina Zhur.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mazhur7/JavaScript-Data-APIs.git"
+  },
+  "keywords": [
+    "exampla",
+    "data"
+  ],
+  "author": "Marina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mazhur7/JavaScript-Data-APIs/issues"
+  },
+  "homepage": "https://github.com/mazhur7/JavaScript-Data-APIs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "geolocation": "^0.2.0"
+  }
+}
