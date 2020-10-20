@@ -32,7 +32,7 @@ auto update:
 save geolocation data into database:
 Routing,
 JSON Parsing
-POST and fetch()
+POST and the function  fetch()
 
 
 
