@@ -1,14 +1,18 @@
 # JavaScript-Data-APIs
 Working with Data and APIs in JavaScript
-Hea you can fined  3 HTML pages including diferent types of data resurs:
+apps: node.js, express
 
+Start: 
+run  localhoste:3000 from terminal: node index.js
+open in browser: http://localhost:3000/
 
- 
-# 1 Page - image and text file fetched
+Hea you can fined  3 HTML pages:
+
+# 1 Page - image (fetch())
   image:
       fetch();
       urlId;
- 
+ # 2 Page - csv file fetched
   csv data:
       load CSV file; https://data.giss.nasa.gov/gistemp/
 
@@ -18,7 +22,7 @@ Hea you can fined  3 HTML pages including diferent types of data resurs:
         Chart style;
 
 
-# 2 Page - Json - geolocation map
+# 3 Page - Json - geolocation map
 
 https://wheretheiss.at/
 https://api.wheretheiss.at/v1/satellites
