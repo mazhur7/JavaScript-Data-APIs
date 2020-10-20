@@ -6,7 +6,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
     <title> Data/APIs : data example objects </title>
 </head>
 
@@ -14,18 +17,70 @@
     <h1>Data App: Geolocation</h1>
     <h4>Fetch JSON from API and map lat lon </h4>
     <div>
-        <h2><a href="index.html">Home</a> |<a href="temperaturdata.html">CSV data fetch </a> || <a href="test.html">Json data fetch </a> </h2>
+        <h3><a href="index.html">Home</a> |<a href="temperaturdata.html">*CSV/ climate data </a> || <a href="test.html">*Json/ geolocation map </a> </h3>
     </div>
 
+    <h1>Where is the ISS?</h1>
+    <p>latitude: <span id="lat"></span>&deg; </br>
+        longitude: <span id="long"></span>&deg;
+    </p>
+
+    <button id="url_api">save in db</button>
+
+    <div id="issMap">
+    </div>
 
     <script>
+        ///////making map & tiles/////////////
+        const myMap = L.map('issMap').setView([0, 0], 1);
+
+        const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, {
+            attribution
+        });
+        tiles.addTo(myMap);
+        /////making a map marker/////////////
+        const marker = L.marker([0, 0]).addTo(myMap);
+        ///connection//////////////
         const url_api = 'https://api.wheretheiss.at/v1/satellites/25544';
         async function getUrlAPI() {
             const response = await fetch(url_api);
             const data = await response.json();
-            console.log(data);
-            console.log('connected')
-        }
+            const {
+                latitude,
+                longitude
+            } = data;
+
+            //request a map marker 1var:  const marker = L.marker([latitude, longitude]).addTo(myMap);
+            marker.setLatLng([latitude, longitude]);
+            //specified map location
+            myMap.setView([latitude, longitude], 3);
+
+            document.getElementById('lat').textContent = latitude.toFixed(2);
+            document.getElementById('long').textContent = longitude.toFixed(2);
+            //console.log(latitude, longitude);
+
+            //////////fetch data into database////////////////////////////
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify(data)
+            };
+            const res = await fetch('/api', options);
+            const json = await res.json();
+            console.log(json);
+        };
+
+
+        //const dbdata = {}
+        getUrlAPI();
+
+        //////auto update////
+        // setInterval(getUrlAPI, 5000);
     </script>
 
 

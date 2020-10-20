@@ -5,14 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <title> Data/APIs : data example objects </title>
 </head>
 
 <body>
     <h1>Data App</h1>
     <div>
-        <h2><a href="index.html">Home</a> |<a href="temperaturdata.html">*.CSV data fetch </a> || <a href="test.html">Json data fetch </a> </h2>
+        <h3><a href="index.html">Home</a> |<a href="temperaturdata.html">*CSV/ climate data </a> || <a href="test.html">*Json/ geolocation map </a> </h3>
+    </div>
+    <div>
+        <img src="" id="bigdata" width="1000" />
+
+
+
     </div>
 </body>
+
+<script>
+    /////////////////fetch image file///////////////////////////
+
+
+
+    catchBigdata()
+        .then(resp => {
+            console.log('Yu-huu!!!')
+        })
+        .catch(error => {
+            console.log('Error!')
+            console.error(error);
+        });
+
+    async function catchBigdata() {
+        const res = await fetch('/fetch_data/Big-Data-blog1.jpg');
+        const blob = await res.blob();
+        document.getElementById('bigdata').src = URL.createObjectURL(blob);
+    }
+</script>
 
 </html>

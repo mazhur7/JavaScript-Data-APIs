@@ -5,44 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title> Data/APIs : data example objects </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <title> Data/APIs </title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
     <!-- chart.js loading for data visualisation -->
 </head>
 
 <body>
-    <h1>Data App: image and text objects </h1>
+    <h1>Data App: Global Average Temperatures.csv</h1>
     <div>
-        <h2><a href="index.html">Home</a> |<a href="temperaturdata.html">*.CSV data fetch </a> || <a href="test.html">Json data fetch </a> </h2>
+        <h3><a href="index.html">Home</a> |<a href="temperaturdata.html">*CSV/ climate data </a> || <a href="test.html">*Json/ geolocation map </a> </h3>
     </div>
+    <div>
 
-    <img src="" id="bigdata" width="1000" />
-    <h3> <a href="csv_example_multiple.html">chart with multiple lines</a></h3>
-    <canvas id="chart" width="400" height="200"></canvas>
+        <h3> <a href="csv_example_multiple.html">chart with multiple lines</a></h3>
+        <canvas id="chart"></canvas>
 
-    <table id="table">
-        <td> </td>
-    </table>
-
+    </div>
     <script>
-        /////////////////fetch image file///////////////////////////
-        catchBigdata()
-            .then(resp => {
-                console.log('Yu-huu!!!')
-            })
-            .catch(error => {
-                console.log('Error!')
-                console.error(error);
-            });
-
-        async function catchBigdata() {
-            const res = await fetch('/fetch_data/Big-Data-blog1.jpg');
-            const blob = await res.blob();
-            document.getElementById('bigdata').src = URL.createObjectURL(blob);
-        }
-        //////////////////chart ////////////////////
+        //////////////////making one chart ////////////////////
 
         ChartIt();
         async function ChartIt() {
