@@ -3,7 +3,8 @@ Working with Data and APIs in JavaScript
 apps: node.js, express
 
 Start: 
-run  localhoste:3000 from terminal: node index.js
+run  localhoste:3000 from terminal: 
+            node index.js
 open in browser: http://localhost:3000/
 
 Hea you can fined  3 HTML pages:
@@ -38,10 +39,6 @@ Routing,
 JSON Parsing
 POST and fetch()
 
-
-
-
-# 3Page - database connection 
 
 
 
